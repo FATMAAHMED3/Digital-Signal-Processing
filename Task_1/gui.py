@@ -41,6 +41,7 @@ if selected == "Task 1":
     x_s2 = test.indices_s2
     y_s2 = test.samples_s2
 
+
     # Show in Streamlit
     st.pyplot(creat_plot("Indices","Values",x_s2,y_s2,Label="Signal 2"))
 
@@ -81,14 +82,17 @@ if selected == "Task 1":
 elif selected == "Task 2":
     st.title("Task 2")
     signal_type = st.selectbox("Signal Generation:", ["Sin", "Cos"])
+    representation = st.selectbox("Representation:", ["Continuous", "Discrete"])
     A = st.number_input("Enter Amplitude: ")
     phase_degree = st.number_input("Enter Phase Shift in degrees: ")
     analog_freq = st.number_input("Enter Analog Frequency: ")
-    if signal_type == "Sin":
-        x,y = Task_2.generate_cont_signal('s',A,phase_degree,analog_freq)
-    else:
-        x,y = Task_2.generate_cont_signal('c',A,phase_degree,analog_freq)
+    fs = None
+    if representation == "Discrete":
+        fs = st.number_input("Enter Sampling Frequency: ")
+    duration = st.number_input("Enter Duration:", value=1.0)
+    x, y = Task_2.generate_signal(signal_type, representation.lower(), A, phase_degree, analog_freq, fs, duration)
 
+   
     st.pyplot(creat_plot("Time","Value",x,y))
 
 
