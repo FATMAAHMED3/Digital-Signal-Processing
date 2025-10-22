@@ -9,16 +9,19 @@ import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu
 
 
-def creat_plot(x_Label,y_label,x,y,Label="none",title ="none", y_Ticks = "none"):
+def creat_plot(x_Label,y_label,x,y,Label="none",title ="none", y_Ticks = "none",y_tick_labels = "none"):
     fig, ax = plt.subplots()
 
     if Label=="none":
-        ax.plot(x, y)
+        ax.plot(x, y,marker='o', linestyle='-', markersize=6)
     else:
-        ax.plot(x, y, label=Label)
+        ax.plot(x, y, label=Label,marker='o', linestyle='-', markersize=6)
 
     if y_Ticks !="none":
         ax.set_yticks(y_Ticks)
+    
+    if y_tick_labels !="none":
+        ax.set_yticklabels(y_tick_labels)
 
     ax.set_xlabel(x_Label)
     ax.set_ylabel(y_label)
@@ -140,16 +143,22 @@ elif selected == "Task 3":
 
     y_t = range(1,num_Levels+1)
 
+    y_t_labels = range(0,num_Levels)
+
+    num = num_Levels-1
+    bits = num.bit_length()  # minimum bits needed
+    binary_values = [format(x, f'0{bits}b') for x in y_t_labels]
+
     
     total = 0
     for e in error:
         total += pow(e,2)
     
-    print(error)
+    print("Interval indices ", interval_indices)
     avg_power_error = total/len(error)
 
 
-    st.pyplot(creat_plot("Samples","Encoded Values",i,interval_indices,Label="none",title =f"Signal after Quantization with {num_Levels} levels",y_Ticks=y_t))
+    st.pyplot(creat_plot("Samples","Encoded Values",i,interval_indices,Label="none",title =f"Signal after Quantization with {num_Levels} levels",y_Ticks=y_t,y_tick_labels=binary_values))
 
     st.write("Average error power = " ,avg_power_error)
 
