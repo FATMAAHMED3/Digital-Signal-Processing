@@ -23,10 +23,12 @@ def quantize_signal(values,num_bits=-1,num_levels=-1):
         i = min_val
         counter = -1
 
-        # if val == max_val:
-        #     encoded_values.append(format(num_levels-1,f"0{num_bits}b"))
-        #     quantized_values.append(max_val - half_delta)
-        #     continue
+        if val == max_val:
+            encoded_values.append(format(num_levels-1,f"0{num_bits}b"))
+            quantized_values.append(max_val - half_delta)
+            interval_indices.append(num_levels)
+            error.append(max_val - half_delta - val)
+            continue
         if val == min_val:
             encoded_values.append(format(0,f"0{num_bits}b"))
             interval_indices.append(1)
@@ -35,7 +37,7 @@ def quantize_signal(values,num_bits=-1,num_levels=-1):
             continue
 
 
-        while i < max_val:
+        while i <= max_val:
             if (i>=val):
                 break
             q_val = i
