@@ -10,7 +10,7 @@ def compute_convolution(x_indices, x_samples, h_indices, h_samples):
     for n in range(n_start, n_end + 1):
         y_n = 0
         for m in x_indices:
-            x_m = x_map.get(m, 0.0) 
+            x_m = x_map[m]
             h_n_minus_m = h_map.get(n - m, 0.0)
             y_n += x_m * h_n_minus_m
         Y_samples.append(y_n)
