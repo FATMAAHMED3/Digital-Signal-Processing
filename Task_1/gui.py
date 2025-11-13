@@ -3,6 +3,8 @@ import Task1Functions
 import Task_2
 import TEST_functions
 import Task_3
+import Task_4_moving_average
+
 
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -34,7 +36,7 @@ def creat_plot(x_Label,y_label,x,y,Label="none",title ="none", y_Ticks = "none",
 with st.sidebar:
     selected = option_menu(
         menu_title="Choose Task",
-        options=["Task 1","Task 2","Task 3"],
+        options=["Task 1","Task 2","Task 3","Task 4"],
     )
 
 if selected == "Task 1":
@@ -164,6 +166,15 @@ elif selected == "Task 3":
 
     st.pyplot(creat_plot("Samples","Values",i,v,title ="Signal before quantization"))
     
+elif selected == "Task 4":
+    st.title("Task 4")
+    with st.expander("Moving Average"):
+        i,v = TEST_functions.ReadSignalFile("Task_4_Tests\Moving Average testcases\MovingAvg_input.txt")
+        st.pyplot(creat_plot("Indices","Values",i,v,title ="Signal Before Averaging"))
+        W_S = st.number_input("Enter Window Size: ", value=3,step=1)
+        output_indices,output_values = Task_4_moving_average.moving_avg(W_S,i,v)
+        st.pyplot(creat_plot("Indices","Values",output_indices,output_values,title =f"Signal after averaging with window size = {W_S}"))
+
 
 
 
