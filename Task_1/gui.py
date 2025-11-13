@@ -4,6 +4,9 @@ import Task_2
 import TEST_functions
 import Task_3
 import Task_4_moving_average
+import task5_Derivative
+import Task5_Convolution
+
 
 
 import streamlit as st
@@ -174,6 +177,31 @@ elif selected == "Task 4":
         W_S = st.number_input("Enter Window Size: ", value=3,step=1)
         output_indices,output_values = Task_4_moving_average.moving_avg(W_S,i,v)
         st.pyplot(creat_plot("Indices","Values",output_indices,output_values,title =f"Signal after averaging with window size = {W_S}"))
+
+    with st.expander("Sharpening"):
+        i,v = TEST_functions.ReadSignalFile("Task_4_Tests\Derivative testcases\Derivative_input.txt")
+        st.pyplot(creat_plot("Indices","Values",i,v,title ="Input Signal"))
+        Y_indices_D1, Y_samples_D1 = task5_Derivative.compute_first_derivative(v)
+        st.pyplot(creat_plot("Indices","Values",Y_indices_D1,Y_samples_D1,title ="First Derivative of input signal"))
+
+        Y_indices_D2, Y_samples_D2 = task5_Derivative.compute_second_derivative(v)
+        st.pyplot(creat_plot("Indices","Values",Y_indices_D2,Y_samples_D2,title ="Second Derivative of input signal"))
+
+    with st.expander("Convolution"):
+        i,v = TEST_functions.ReadSignalFile("Task_4_Tests\Convolution testcases\Signal 1.txt")
+        i2,v2 = TEST_functions.ReadSignalFile("Task_4_Tests\Convolution testcases\Signal 2.txt")
+
+        st.pyplot(creat_plot("Indices","Values",i,v,title ="Signal 1"))
+        st.pyplot(creat_plot("Indices","Values",i2,v2,title ="Signal 2"))
+
+        Y_indices, Y_samples = Task5_Convolution.compute_convolution(i, v, i2, v2)
+        st.pyplot(creat_plot("Indices","Values",Y_indices,Y_samples,title ="Convolution of the 2 signals"))
+
+
+
+
+
+
 
 
 
