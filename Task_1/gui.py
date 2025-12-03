@@ -6,6 +6,7 @@ import Task_3
 import Task_4_moving_average
 import task5_Derivative
 import Task5_Convolution
+import Task_5_DFT
 
 
 
@@ -39,7 +40,7 @@ def creat_plot(x_Label,y_label,x,y,Label="none",title ="none", y_Ticks = "none",
 with st.sidebar:
     selected = option_menu(
         menu_title="Choose Task",
-        options=["Task 1","Task 2","Task 3","Task 4"],
+        options=["Task 1","Task 2","Task 3","Task 4","Task 5"],
     )
 
 if selected == "Task 1":
@@ -196,6 +197,27 @@ elif selected == "Task 4":
 
         Y_indices, Y_samples = Task5_Convolution.compute_convolution(i, v, i2, v2)
         st.pyplot(creat_plot("Indices","Values",Y_indices,Y_samples,title ="Convolution of the 2 signals"))
+
+elif selected == "Task 5":
+    st.title("Task 5")
+    fs = st.number_input("Sampling frequency: ")
+    indices, samples =Task_5_DFT.MyReadSignalFile("Task_5_Tests\DFT\input_Signal_DFT.txt")
+
+    As ,phase_shifts, omegas = Task_5_DFT.DFT(indices, samples,fs)
+
+    st.pyplot(creat_plot("Omega","Amplitude",omegas,As,Label="none",title ="Omega Vs Amplitudes", y_Ticks = "none",y_tick_labels = omegas))
+
+    st.pyplot(creat_plot("Omega","Phase Shift",omegas,phase_shifts,Label="none",title ="Omega Vs Phase Shift", y_Ticks = "none",y_tick_labels = omegas))
+
+    Amps,phas = Task_5_DFT.MyReadSignalFile("Task_5_Tests\IDFT\Input_Signal_IDFT_A_Phase.txt")
+    values = Task_5_DFT.IDFT(Amps, phas)
+
+    indices = list(range(len(values)))
+
+    st.pyplot(creat_plot("Indices","Values",indices,values,title ="Signal after reconstruction (IDFT)"))
+
+
+
 
 
 

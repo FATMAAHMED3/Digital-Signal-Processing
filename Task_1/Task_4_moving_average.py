@@ -14,11 +14,11 @@ def moving_avg(window_size, indices, values):
     for i in range(half_window, last_element +1):
         j = i
         sum = 0
-        for j in range(j, j-half_window -1, -1):
-            sum += values[j]
+        for k in range(j, j-half_window -1, -1):
+            sum += values[k]
         j = i
-        for j in range(j+1 , j+ half_window + 1):
-            sum += values[j]
+        for k in range(j+1 , j+ half_window + 1):
+            sum += values[k]
         avg = sum/window_size
         
         output_values.append(avg)
