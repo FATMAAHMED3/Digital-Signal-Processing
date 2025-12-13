@@ -7,6 +7,7 @@ import Task_4_moving_average
 import task5_Derivative
 import Task5_Convolution
 import Task_5_DFT
+import correlation
 
 
 
@@ -40,7 +41,7 @@ def creat_plot(x_Label,y_label,x,y,Label="none",title ="none", y_Ticks = "none",
 with st.sidebar:
     selected = option_menu(
         menu_title="Choose Task",
-        options=["Task 1","Task 2","Task 3","Task 4","Task 5"],
+        options=["Task 1","Task 2","Task 3","Task 4","Task 5","Task 6"],
     )
 
 if selected == "Task 1":
@@ -215,6 +216,22 @@ elif selected == "Task 5":
     indices = list(range(len(values)))
 
     st.pyplot(creat_plot("Indices","Values",indices,values,title ="Signal after reconstruction (IDFT)"))
+
+elif selected == "Task 6":
+    st.title("Task 6")
+    i,v = TEST_functions.ReadSignalFile("Correlation Task_Tests\Point1 Correlation\Corr_input signal1.txt")
+    i2,v2 = TEST_functions.ReadSignalFile("Correlation Task_Tests\Point1 Correlation\Corr_input signal2.txt")
+
+    st.pyplot(creat_plot("Indices","Values",i,v,title ="Signal 1"))
+    st.pyplot(creat_plot("Indices","Values",i2,v2,title ="Signal 2"))
+
+    Y_indices, Y_samples = correlation.compute_r12(i,v,i2,v2)
+    norm = correlation.compute_p12(Y_samples, v, v2)
+
+    st.pyplot(creat_plot("Indices","Values",Y_indices,norm,title ="Correlation of both signals after normalization"))
+
+
+
 
 
 
