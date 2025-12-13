@@ -34,7 +34,7 @@ def DFT (indices, values,fs):
 ################TEST#######################
 
 def float_total_digits(x, total_digits=15):
-    digits_before = len(str(int(abs(x))))       # abs for negative numbers
+    digits_before = len(str(int(abs(x))))     
     decimal_digits = max(total_digits - digits_before, 0)
     return round(x, decimal_digits)
 
@@ -43,7 +43,7 @@ def MyReadSignalFile(file_name):
     expected_samples = []
     
     with open(file_name, 'r') as f:
-        # skip 4 header lines
+       
         for _ in range(3):
             f.readline()
         
@@ -53,11 +53,11 @@ def MyReadSignalFile(file_name):
             L = line.strip().split()
 
             if len(L) == 2:
-                # Remove trailing 'f' from both values, if present
+               
                 v1_str = L[0].rstrip('f')
                 v2_str = L[1].rstrip('f')
 
-                # Convert to float (index may not be integer if file uses floats)
+               
                 V1 = float(v1_str)
                 V2 = float(v2_str)
 
@@ -110,7 +110,7 @@ def IDFT(amplitude_list, phase_list):
         for k in range(N):
             exponent = 1j * 2 * math.pi * k * n / N
             total += X[k] * cmath.exp(exponent)
-        idft.append(round(total.real / N))  # <-- يمنع complex output تماماً
+        idft.append(round(total.real / N))
 
     return idft
 
