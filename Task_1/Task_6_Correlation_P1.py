@@ -90,8 +90,8 @@ def compute_p12(R, x_samples, h_samples):
 
     return P
 
-x_indices, x_samples = ReadSignalFile(r"Correlation Task_Tests\Point1 Correlation\Corr_input signal1.txt")
-h_indices, h_samples = ReadSignalFile(r"Correlation Task_Tests\Point1 Correlation\Corr_input signal2.txt")
+x_indices, x_samples = ReadSignalFile(r"Task_6_Tests\Point1 Correlation\Corr_input signal1.txt")
+h_indices, h_samples = ReadSignalFile(r"Task_6_Tests\Point1 Correlation\Corr_input signal2.txt")
 
 Y_indices, R = compute_r12(x_indices, x_samples, h_indices, h_samples)
 
@@ -111,4 +111,4 @@ for idx, val in zip(indices, P):
     print(f"Index: {idx}, Value: {val:.8f}")
 
 
-Compare_Signals(r"Correlation Task_Tests\Point1 Correlation\CorrOutput.txt", indices, P)
+Compare_Signals(r"Task_6_Tests\Point1 Correlation\CorrOutput.txt", indices, P)

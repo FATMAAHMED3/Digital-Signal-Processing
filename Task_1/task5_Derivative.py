@@ -1,5 +1,5 @@
 
-from TEST_functions import ReadSignalFile
+from Task_1_Test_files.TEST_functions import ReadSignalFile
 from task_5_Derivative_testcases import FirstDerivativeSamplesAreEqual,SecondDerivativeSamplesAreEqual
 def compute_first_derivative(input_samples):
     x = input_samples

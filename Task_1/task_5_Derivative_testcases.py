@@ -1,5 +1,5 @@
 
-from TEST_functions import ReadSignalFile
+from Task_1_Test_files.TEST_functions import ReadSignalFile
 def FirstDerivativeSamplesAreEqual(Your_indices, Your_samples):
     
     file_name = r"Task_4_Tests\Derivative testcases\1st_derivative_out.txt"

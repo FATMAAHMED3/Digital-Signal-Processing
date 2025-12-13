@@ -1,4 +1,4 @@
-from TEST_functions import ReadSignalFile
+from Task_1_Test_files.TEST_functions import ReadSignalFile
 def ConvolutionSamplesAreEqual(Your_indices, Your_samples):
     file_name = r"Task_4_Tests\Convolution testcases\Conv_output.txt" 
     expected_indices, expected_samples = ReadSignalFile(file_name)

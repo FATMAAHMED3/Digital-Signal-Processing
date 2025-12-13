@@ -1,6 +1,6 @@
 import math
 
-import TEST_functions
+import Task_1_Test_files.TEST_functions as TEST_functions
 
 
 def moving_avg(window_size, indices, values):

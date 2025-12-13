@@ -1,4 +1,4 @@
-import TEST_functions
+import Task_1_Test_files.TEST_functions as TEST_functions
 import Task_3_Tests.Test_1.QuanTest1 as test1
 import Task_3_Tests.Test_2.QuanTest2 as test2
 import Task_3

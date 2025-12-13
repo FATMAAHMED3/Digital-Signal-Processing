@@ -1,6 +1,6 @@
 import cmath
 import math
-import TEST_functions
+import Task_1_Test_files.TEST_functions as TEST_functions
 import Task_5_Tests.signalcompare as compare_test
 
 

@@ -1,13 +1,13 @@
-import test
-import Task1Functions
+import Task_1_test
+import Task_1
 import Task_2
-import TEST_functions
+import Task_1_Test_files.TEST_functions as TEST_functions
 import Task_3
 import Task_4_moving_average
 import task5_Derivative
 import Task5_Convolution
 import Task_5_DFT
-import correlation
+import Task_6_Correlation_P1
 
 
 
@@ -47,14 +47,14 @@ with st.sidebar:
 if selected == "Task 1":
     st.title("Task 1")
     # Data
-    x_s1 = test.indices_s1
-    y_s1 = test.samples_s1
+    x_s1 = Task_1_test.indices_s1
+    y_s1 = Task_1_test.samples_s1
 
     st.pyplot(creat_plot("Indices","Values",x_s1,y_s1,Label="Signal 1"))
 
     # Data
-    x_s2 = test.indices_s2
-    y_s2 = test.samples_s2
+    x_s2 = Task_1_test.indices_s2
+    y_s2 = Task_1_test.samples_s2
 
 
     # Show in Streamlit
@@ -68,19 +68,19 @@ if selected == "Task 1":
 
     if choice == "Add":
 
-        st.pyplot(creat_plot("Indices","Values",test.add_output_indices, test.add_output_samples,title="Signal 1 + Signal 2"))
+        st.pyplot(creat_plot("Indices","Values",Task_1_test.add_output_indices, Task_1_test.add_output_samples,title="Signal 1 + Signal 2"))
 
     elif choice == "Subtract":
 
-        st.pyplot(creat_plot("Indices","Values",test.sub_output_indices, test.sub_output_samples,title="Signal 1 - Signal 2"))
+        st.pyplot(creat_plot("Indices","Values",Task_1_test.sub_output_indices, Task_1_test.sub_output_samples,title="Signal 1 - Signal 2"))
 
     elif choice == "Multiply":
 
-        st.pyplot(creat_plot("Indices","Values",test.mul_output_indices, test.mul_output_samples,title="Signal 1 *5 "))
+        st.pyplot(creat_plot("Indices","Values",Task_1_test.mul_output_indices, Task_1_test.mul_output_samples,title="Signal 1 *5 "))
 
     elif choice == "Delay/Advance":
 
-        st.pyplot(creat_plot("Indices","Values",test.my_indices_shift, test.my_samples_shift,title="Signal 1 advanced by 3 "))
+        st.pyplot(creat_plot("Indices","Values",Task_1_test.my_indices_shift, Task_1_test.my_samples_shift,title="Signal 1 advanced by 3 "))
 
     elif choice == "Folding/reversing":
         options = ["Signal 1", "Signal 2"]
@@ -88,9 +88,9 @@ if selected == "Task 1":
 
         if choice == "Signal 1":
 
-            st.pyplot(creat_plot("Indices","Values",test.my_indices_fold, test.my_samples_fold,title="Signal 1 after folding"))
+            st.pyplot(creat_plot("Indices","Values",Task_1_test.my_indices_fold, Task_1_test.my_samples_fold,title="Signal 1 after folding"))
         else:
-            x_f, y_f = Task1Functions.myfolding(test.indices_s2,test.samples_s2)
+            x_f, y_f = Task_1.myfolding(Task_1_test.indices_s2,Task_1_test.samples_s2)
             st.pyplot(creat_plot("Indices","Values",x_f, y_f,title="Signal 2 after folding"))
 
 
@@ -219,14 +219,14 @@ elif selected == "Task 5":
 
 elif selected == "Task 6":
     st.title("Task 6")
-    i,v = TEST_functions.ReadSignalFile("Correlation Task_Tests\Point1 Correlation\Corr_input signal1.txt")
-    i2,v2 = TEST_functions.ReadSignalFile("Correlation Task_Tests\Point1 Correlation\Corr_input signal2.txt")
+    i,v = TEST_functions.ReadSignalFile("Task_6_Tests\Point1 Correlation\Corr_input signal1.txt")
+    i2,v2 = TEST_functions.ReadSignalFile("Task_6_Tests\Point1 Correlation\Corr_input signal2.txt")
 
     st.pyplot(creat_plot("Indices","Values",i,v,title ="Signal 1"))
     st.pyplot(creat_plot("Indices","Values",i2,v2,title ="Signal 2"))
 
-    Y_indices, Y_samples = correlation.compute_r12(i,v,i2,v2)
-    norm = correlation.compute_p12(Y_samples, v, v2)
+    Y_indices, Y_samples = Task_6_Correlation_P1.compute_r12(i,v,i2,v2)
+    norm = Task_6_Correlation_P1.compute_p12(Y_samples, v, v2)
 
     st.pyplot(creat_plot("Indices","Values",Y_indices,norm,title ="Correlation of both signals after normalization"))
 

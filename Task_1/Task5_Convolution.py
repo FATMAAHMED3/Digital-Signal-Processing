@@ -1,4 +1,4 @@
-from TEST_functions import ReadSignalFile
+from Task_1_Test_files.TEST_functions import ReadSignalFile
 from Task5_ConvolutionTestCase import ConvolutionSamplesAreEqual
 def compute_convolution(x_indices, x_samples, h_indices, h_samples):
     x_map = dict(zip(x_indices, x_samples))
