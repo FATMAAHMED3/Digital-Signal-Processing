@@ -112,3 +112,16 @@ for idx, val in zip(indices, P):
 
 
 Compare_Signals(r"Task_6_Tests\Point1 Correlation\CorrOutput.txt", indices, P)
+
+def time_delay(fs):
+    x_indices, x_samples = ReadSignalFile(r"Task_6_Tests\Point2 Time analysis\TD_input signal1.txt")
+    h_indices, h_samples = ReadSignalFile(r"Task_6_Tests\Point2 Time analysis\TD_input signal2.txt")
+    Y_indices, R = compute_r12(x_indices, x_samples, h_indices, h_samples)
+    print ("result before normalization" , R)
+    P = compute_p12(R, x_samples, h_samples)
+    indices = Y_indices    #shifts
+    max_index = np.argmax(P)
+    time_delay = indices[max_index]
+    print("Time Delay =", time_delay/fs)
+    return time_delay/fs
+time =time_delay(100)

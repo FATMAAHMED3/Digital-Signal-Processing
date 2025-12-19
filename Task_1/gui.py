@@ -230,6 +230,18 @@ elif selected == "Task 6":
 
     st.pyplot(creat_plot("Indices","Values",Y_indices,norm,title ="Correlation of both signals after normalization"))
 
+    st.write("time delay---------------------------------------------------")
+    i,v = TEST_functions.ReadSignalFile("Task_6_Tests\Point2 Time analysis\TD_input signal1.txt")
+    i2,v2 = TEST_functions.ReadSignalFile("Task_6_Tests\Point2 Time analysis\TD_input signal2.txt")
+
+    st.pyplot(creat_plot("Indices","Values",i,v,title ="Signal 1"))
+    st.pyplot(creat_plot("Indices","Values",i2,v2,title ="Signal 2"))
+
+    Y_indices, Y_samples = Task_6_Correlation_P1.compute_r12(i,v,i2,v2)
+    norm = Task_6_Correlation_P1.compute_p12(Y_samples, v, v2)
+    time =Task_6_Correlation_P1.time_delay(100)
+    st.write("time delay=",time)
+
 
 
 
