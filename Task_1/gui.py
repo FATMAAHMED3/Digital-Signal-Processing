@@ -8,6 +8,8 @@ import task5_Derivative
 import Task5_Convolution
 import Task_5_DFT
 import Task_6_Correlation_P1
+import Filters
+from Task5_Convolution import compute_convolution
 
 
 
@@ -41,7 +43,7 @@ def creat_plot(x_Label,y_label,x,y,Label="none",title ="none", y_Ticks = "none",
 with st.sidebar:
     selected = option_menu(
         menu_title="Choose Task",
-        options=["Task 1","Task 2","Task 3","Task 4","Task 5","Task 6"],
+        options=["Task 1","Task 2","Task 3","Task 4","Task 5","Task 6","Task 7"],
     )
 
 if selected == "Task 1":
@@ -241,6 +243,35 @@ elif selected == "Task 6":
     norm = Task_6_Correlation_P1.compute_p12(Y_samples, v, v2)
     time =Task_6_Correlation_P1.time_delay(100)
     st.write("time delay=",time)
+
+elif selected == "Task 7":
+    st.title("Task 7")
+    i,v = TEST_functions.ReadSignalFile("Filters_Tests\FIR test cases\Testcase 2\ecg400.txt")
+
+    options = ["low", "high", "bandpass", "bandstop"]
+
+    choice = st.selectbox("Choose type of filter:", options)
+
+    fs = st.number_input("Enter Sampling Frequency: ",value=8000)
+    sba = st.number_input("stop attenuation : ",value=50)
+    tb = st.number_input("transition band : ",value=500)
+
+    if choice == "low" or choice == "high":
+        f1 = st.number_input("Enter cut off frequency: ",value=1500)
+        fil = Filters.make_filter(choice, fs, sba , tb , f1)
+    elif choice == "bandpass" or choice == "bandstop":
+        f1 = st.number_input("Enter f1: ")
+        f2 = st.number_input("Enter f2: ")
+        fil = Filters.make_filter(choice, fs, sba , tb , f1,f2)
+        
+    y_indices, y_samples = compute_convolution(i, v,list(fil.keys()), list(fil.values()))
+
+    st.pyplot(creat_plot("Indices","Values",i,v,title ="ecg 400 signal"))
+    st.pyplot(creat_plot("Indices","Values",fil.keys(),fil.values(),title ="Filter in time domain"))
+    st.pyplot(creat_plot("Indices","Values",y_indices,y_samples,title ="Convolution of signal and filter"))
+    
+
+   
 
 
 
